@@ -160,7 +160,7 @@ def main():
             st.write(response)
     
     # Display chat history
-    if st.session_state.chat_history:app.py
+    if st.session_state.chat_history:
     
         st.markdown("### Previous Interactions")
         for idx, interaction in enumerate(reversed(st.session_state.chat_history)):
