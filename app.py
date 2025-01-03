@@ -167,6 +167,21 @@ def send_gemini_message(chat, input_text: str) -> str:
 
 @retry(stop=stop_after_attempt(10), wait=wait_exponential(multiplier=1, min=4, max=10))
 def send_open_ai_chat(client, prompt) -> Optional[any]:
+    """Send a chat message to OpenAI's API and handle URL content extraction if needed.
+
+    Args:
+        client (Any): An initialized OpenAI client instance
+        prompt (str): The user's input prompt to process
+
+    Returns:
+        Optional[ChatCompletion]: The model's response if successful, None if failed
+
+    Raises:
+        ValueError: If client is not initialized or prompt is empty
+        openai.OpenAIError: For OpenAI-specific API errors
+        requests.exceptions.RequestException: For network-related errors
+        json.JSONDecodeError: For JSON parsing errors
+    """
 
     extract_url_content_tool = {
             "name": "extract_url_content",
