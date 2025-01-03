@@ -1,3 +1,4 @@
 .cursorrules
-drspin-env/*
 .DS_Store
+drspin-env/*
+.vscode
