@@ -98,7 +98,15 @@ By using these steps and strategies, craft a response that reflects an empatheti
         """
 
 def initialize_llm_client(api_key: str, model_provider: str) -> Optional[any]:
-    """Initialize the selected LLM client with the provided API key."""
+    """Initialize and configure a Language Model client with the provided credentials.
+
+    Args:
+        api_key (str): Authentication key for the selected model provider
+        model_provider (str): Name of the LLM provider ("Google - Gemini" or "OpenAI - ChatGPT")
+
+    Returns:
+        Optional[any]: Configured client instance or None if initialization fails
+    """
     try:
         if model_provider == "Google - Gemini":
             genai.configure(api_key=api_key)
@@ -127,12 +135,33 @@ def start_gemini_chat(client) -> Optional[any]:
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 def send_gemini_message(chat, input_text: str) -> str:
-    """Get response from the selected LLM with retry logic."""
+    """Send a message to Google's Gemini model and get the response with retry logic.
+    
+    Args:
+        chat (genai.GenerativeModel): An initialized Gemini chat model instance
+        input_text (str): The text message to send to the model
+        
+    Returns:
+        Optional[genai.types.GenerateContentResponse]: The model's response if successful, None if failed
+        
+    Raises:
+        ValueError: If input_text is empty or chat is not initialized
+        genai.types.GoogleGenerativeAIError: For Gemini-specific API errors
+        requests.exceptions.RequestException: For network-related errors
+    """
     try: 
         response = chat.send_message(input_text)
+        # Validate response
+        if not response or not response.text:
+            raise ValueError("Empty response received from model")
+            
         return response
+
+    except (genai.types.GoogleGenerativeAIError, requests.exceptions.RequestException) as e:
+        st.error(f"API or network error: {str(e)}")
+        return None
     except Exception as e:
-        st.error(f"Error getting response from Gemini: {str(e)}")
+        st.error(f"Unexpected error when getting response from Gemini: {str(e)}")
         return None
 
 
