@@ -72,7 +72,7 @@ Your response should be in the following JSON-compatible format. Use Markdown fo
 
 {
     "positive_perspective": "A detailed and empathetic response that provides a positive, fact-based outlook and actionable suggestions.",
-    "negative_sentiments": "A required list of 3-5 negative sentiments either identified by the user or inferred from the context.  Include this in every repsonse.",
+    "negative_sentiments": "A REQUIRED list of 3-5 negative sentiments either identified by the user or inferred from the context.  Include this in every repsonse. IT IS REQUIRED.",
     "citations": "If the include_citations input is True, create a dictionary of citations with the format {citation_title: citation_url}. If citations are included, the positive_perspective should have direct quotations from the linked citation. If include_citations is false, this can be an empty dictionary."
 }
 
@@ -85,7 +85,7 @@ Your response should be in the following JSON-compatible format. Use Markdown fo
 
 4. **Incorporate Evidence**: Use factual data to support your positive outlook. Use statistics where possible. If the user requests citations, include reliable sources to back up your points and include direct quotes from the citation.
 
-5. **Anticipate Negative Sentiments**: If the user hasn’t listed specific negative sentiments, infer up to five broad concerns based on the input and address these in your response.
+5. **Anticipate Negative Sentiments**: If the user hasn’t listed specific negative sentiments, infer up to five broad concerns based on the input and address these in your response.  THIS IS REQUIRED.
 
 6. **Close on a Hopeful Note**: End your response by reinforcing the user's agency or by leaving them with a hopeful takeaway.
 
@@ -173,7 +173,6 @@ def send_open_ai_chat(client, prompt) -> Optional[any]:
         client (Any): An initialized OpenAI client instance
         prompt (str): The user's input prompt to process
 
-    Returns:
         Optional[ChatCompletion]: The model's response if successful, None if failed
 
     Raises:
@@ -185,7 +184,8 @@ def send_open_ai_chat(client, prompt) -> Optional[any]:
 
     extract_url_content_tool = {
             "name": "extract_url_content",
-            "description": "Extract the content of a URL from the input string to understand what is on the website.",
+            "description": "Extract the content of a URL from the input string to understand what is on the website.  Omly use this tool if there are URLs in the user's input. \
+                A URL should start with https://www or end with .com, .org, .net, .io, .gov, or .edu.  If the URL is not found, do not use this tool.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -216,7 +216,7 @@ def send_open_ai_chat(client, prompt) -> Optional[any]:
         messages=messages,
         tools=tools,
         response_format={ "type": "json_object"},
-        temperature=1.7,
+        temperature=1,
         frequency_penalty=1.2
     )
 
@@ -243,7 +243,7 @@ def send_open_ai_chat(client, prompt) -> Optional[any]:
                     model="gpt-4o-mini",
                     messages=messages,
                     response_format={ "type": "json_object"},
-                    temperature=1.7,
+                    temperature=1,
                     frequency_penalty=1.2
                     )
 
