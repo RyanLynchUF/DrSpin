@@ -395,7 +395,7 @@ Grab your rose-colored glasses and let's find some silver linings!
     # Top navigation
     col1, col2, col3 = st.columns([5, 1, 1], vertical_alignment='center')
     with col3:
-        st.link_button("📚 Blog", "https://ryanlynch.me/Technical+Projects/Dr.+Spin/Dr.+Spin+-+a+positive+spin+on+life+using+AI")
+        st.link_button("📚 Blog", "https://ryanlynch.me/Technical+Projects+Dashboard/Dr.+Spin/Dr.+Spin+-+a+positive+spin+on+life+using+AI")
 
     # Main content
     st.image("src/img/dr-spin-logo-horizontal-slim.png", use_container_width=False)
