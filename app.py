@@ -362,7 +362,7 @@ def main():
         
         st.markdown("""
         1. Select your preferred model provider.  Please be familiar with any costs of the [Gemini API](https://ai.google.dev/pricing#1_5flash-8B) or [OpenAI API](https://openai.com/api/pricing/).  At this time, Gemini offers a better free tier.
-        2. Enter your API key.  You can find your API key [here](https://platform.openai.com/api-keys) for OpenAI or [here](https://ai.google.com/api-keys) for Google Gemini.
+        2. Enter your API key.  You can find your API key [here](https://platform.openai.com/api-keys) for OpenAI or [here](https://ai.google.dev/gemini-api/docs/api-key) for Google Gemini.
         3. Tell Dr. Spin what's on your mind.  You can include links or upload a document.  
         4. Generate a positive spin!
         5. Refine the response by selecting which negative sentiments you'd like to address.
