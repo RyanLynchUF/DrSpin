@@ -20,6 +20,3 @@ Often, the negative news or outcomes that can make someone feel down are either 
 Applying this frame of mind is difficult. For some reason, we (as humans) are inclined to be more driven to negative news (and news media companies are aware of this). So, I created Dr. Spin to help me put a positive spin on life.
 
 Grab your rose-colored glasses and let's find some silver linings!
-
-
-
